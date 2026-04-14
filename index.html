@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤 게임 박스 - 미니멀 스타일</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>랜덤 게임 박스</h1>
+            <nav class="tabs">
+                <button class="tab-btn active" data-tab="plinko">플링코(핀볼)</button>
+                <button class="tab-btn" data-tab="random-num">랜덤 숫자</button>
+                <button class="tab-btn" data-tab="ladder">사다리 타기</button>
+                <button class="tab-btn" data-tab="roulette">룰렛</button>
+            </nav>
+        </header>
+
+        <main class="game-container">
+            <!-- 플링코 게임 -->
+            <section id="plinko" class="tab-content active">
+                <h2>익스트림 플링코 (순위 뽑기)</h2>
+                <div class="controls row">
+                    <input type="text" id="plinko-names" placeholder="이름 입력 (쉼표 구분)" value="1번, 2번, 3번, 4번, 5번">
+                    <button id="drop-ball">공 투하</button>
+                    <button id="kick-ball" style="background-color: var(--accent-color);">공 튕기기 (Space)</button>
+                    <button id="reset-plinko">초기화</button>
+                </div>
+                <div class="plinko-container" style="display: flex; gap: 20px; align-items: flex-start;">
+                    <div class="canvas-wrapper" style="position: relative; overflow: hidden; border-radius: var(--radius); border: 2px solid #ddd;">
+                        <canvas id="plinko-canvas"></canvas>
+                    </div>
+                    <div id="plinko-rank" class="rank-list">
+                        <h3>도착 순서</h3>
+                        <ol id="rank-items"></ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 랜덤 숫자 뽑기 -->
+            <section id="random-num" class="tab-content">
+                <h2>랜덤 숫자 뽑기</h2>
+                <div class="controls row">
+                    <div class="input-group">
+                        <label>최소</label>
+                        <input type="number" id="min-num" value="1">
+                    </div>
+                    <div class="input-group">
+                        <label>최대</label>
+                        <input type="number" id="max-num" value="100">
+                    </div>
+                    <button id="generate-btn">뽑기</button>
+                </div>
+                <div id="result-num" class="result-display">?</div>
+                <div id="history-num" class="history-list"></div>
+            </section>
+
+            <!-- 사다리 타기 -->
+            <section id="ladder" class="tab-content">
+                <h2>사다리 타기</h2>
+                <div class="controls">
+                    <div class="input-group">
+                        <label>인원수</label>
+                        <input type="number" id="ladder-count" value="4" min="2" max="10">
+                    </div>
+                    <button id="make-ladder">사다리 생성</button>
+                </div>
+                <div class="ladder-canvas-container">
+                    <canvas id="ladder-canvas"></canvas>
+                </div>
+                <div id="ladder-inputs" class="ladder-labels"></div>
+                <div id="ladder-results" class="ladder-labels"></div>
+            </section>
+
+            <!-- 룰렛 -->
+            <section id="roulette" class="tab-content">
+                <h2>룰렛</h2>
+                <div class="controls row">
+                    <input type="text" id="roulette-input" placeholder="항목 입력 (쉼표로 구분)">
+                    <button id="spin-btn">돌리기</button>
+                </div>
+                <div class="roulette-container">
+                    <canvas id="roulette-canvas"></canvas>
+                    <div class="pointer">▼</div>
+                </div>
+                <div id="roulette-result" class="result-display"></div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
